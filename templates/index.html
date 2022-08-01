@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Topic List {% endblock %}</h1>
+    {% for topic in topics %}
+        <a href="{{ url_for('topic', topic_id=topic[0]) }}">
+            <h2>{{ topic[2] }}</h2>
+        </a>
+        <span class="badge badge-primary">{{ topic[1] }}</span>
+        </a>
+        <hr>
+    {% endfor %}
+{% endblock %}

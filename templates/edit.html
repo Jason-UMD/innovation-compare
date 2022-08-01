@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} {{ topic[2] }} {% endblock %}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" name="title" placeholder="Topic title"
+               class="form-control"
+               value="{{ request.form['title'] or topic[2] }}">
+        </input>
+    </div>
+
+    <div class="form-group">
+        <label for="seed_papers">Seed Papers</label>
+	<textarea name="seed_papers" placeholder="Seed paper 1, seed paper 2, etc"
+                  class="form-control">{{ request.form['seed_papers'] or seeds }}</textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="keywords">Keywords</label>
+	<textarea name="keywords" placeholder="Keyword 1, Keyword 2, etc"
+                  class="form-control">{{ request.form['keywords'] or keywords }}</textarea>
+    </div>
+    
+    <div class="form-group">
+        <button type="submit" name="button" value="save" class="btn btn-primary">Save Changes</button>
+        <button type="submit" name="button" value="fetch_keywords" class="btn btn-primary">Fetch Keywords</button>
+        <button type="submit" name="button" value="gen_graph" class="btn btn-primary">Generate Graph</button>
+    </div>
+</form>
+
+
+<img src="static/{{ topic[0] }}.png" height="500" width="500">
+
+<hr>
+
+<form action="{{ url_for('delete', topic_id=topic[0]) }}" method="POST">
+    <input type="submit" value="Delete Topic"
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('Are you sure you want to delete this topic?')">
+</form>
+
+{% endblock %}
